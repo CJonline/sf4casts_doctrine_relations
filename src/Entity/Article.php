@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -185,12 +186,9 @@ class Article
      */
     public function getNonDeletedComments(): Collection
     {
-        $creteria = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('isDeleted', false))
-            ->orderBy(['createdAt' => 'DESC'])
-        ;
+        $criteria = ArticleRepository::getNonDeletedComments();
 
-        return $this->comments->matching($creteria);
+        return $this->comments->matching($criteria);
     }
 
     public function addComment(Comment $comment): self
