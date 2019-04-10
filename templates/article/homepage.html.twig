@@ -26,6 +26,11 @@
                             <span>{{ article.title }}</span>
                             <small>({{ article.nonDeletedComments|length }} comments)</small>
                             <br>
+                            <span class="pl-2 article-details">
+                                {% for tag in article.tags %}
+                                    <span class="badge badge-secondary">{{ tag.name }}</span>
+                                {% endfor %}
+                            </span>
                             <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/alien-profile.png') }}"> {{ article.author }} </span>
                             <span class="pl-5 article-details float-right"> {{ article.publishedAt ? article.publishedAt|ago }}</span>
                         </div>
